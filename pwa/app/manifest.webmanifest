@@ -1,0 +1,14 @@
+{
+  "start_url": ".",
+  "display": "standalone",
+  "name": "Cat Tap!",
+  "short_name": "Cat Tap!",
+  "description": "Tap Croissant to keep her in the air!",
+  "icons": [
+    {
+      "src": "assets/icon144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ]
+}

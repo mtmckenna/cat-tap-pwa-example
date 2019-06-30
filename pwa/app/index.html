@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Cat Tap!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/icon144.png" />
+  <link rel="apple-touch-icon" href="/assets/icon144.png">
+  <script src="lib/phaser.min.js"></script>
+  <script src="src/index.js"></script>
+  <link rel="manifest" href="/manifest.webmanifest">
+</head>
+
+<body>
+  <div class="superwebapp-refresh-box superwebapp-refresh-box-hidden">
+    A new version is available
+    <button class="superwebapp-refresh-box-refresh-button">REFRESH</button>
+    <button class="superwebapp-refresh-box-close-button">&#10005;</button>
+  </div>
+
+</body>
+
+<script type="module">
+  import { Workbox } from "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-window.prod.mjs";
+  if ("serviceWorker" in navigator) {
+    const wb = new Workbox("/sw.js");
+    const refreshBoxHiddenClassName = "superwebapp-refresh-box-hidden";
+    wb.addEventListener("waiting", (event) => {
+      const refreshBox = document.getElementsByClassName("superwebapp-refresh-box")[0];
+      const refreshButton = document.getElementsByClassName("superwebapp-refresh-box-refresh-button")[0];
+      const closeButton = document.getElementsByClassName("superwebapp-refresh-box-close-button")[0];
+      refreshBox.classList.remove(refreshBoxHiddenClassName);
+
+      refreshButton.addEventListener("click", () => {
+        wb.addEventListener("controlling", (event) => {
+          console.log("[Superweb.app] Reloading to get newer version of app...");
+          refreshBox.classList.add(refreshBoxHiddenClassName);
+          window.location.reload();
+        });
+
+        wb.messageSW({ type: "SKIP_WAITING" });
+      });
+
+      closeButton.addEventListener("click", () => {
+        refreshBox.classList.add(refreshBoxHiddenClassName);
+      });
+    });
+
+    wb.register();
+  }
+</script>
+
+</html>
+<style>
+  html,
+  body {
+    background-color: #6a539b;
+    border: 0;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+</style>
+
+<style>
+    .superwebapp-refresh-box {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 5px;
+      bottom: 10px;
+      color: #fff;
+      display: inline-block;
+      left: 50%;
+      padding: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      position: fixed;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+
+    .superwebapp-refresh-box-hidden {
+      display: none;
+    }
+
+    .superwebapp-refresh-box-refresh-button {
+      background: none;
+      border: none;
+      color: #6699ff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+    }
+
+    .superwebapp-refresh-box-refresh-button:hover {
+      color: #3377ff;
+      cursor: pointer;
+    }
+
+    .superwebapp-refresh-box-close-button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .superwebapp-refresh-box-close-button:hover {
+      cursor: pointer;
+    }
+  </style>
