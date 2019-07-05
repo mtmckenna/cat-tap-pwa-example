@@ -10,7 +10,7 @@
 };
 
 const game = new Phaser.Game(config);
-const floorHeight = 50;
+const floorHeight = 80;
 const fontFamily = "Arial, Helvetica, sans-serif";
 let score = 0;
 let height = window.innerHeight;
