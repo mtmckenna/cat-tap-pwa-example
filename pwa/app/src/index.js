@@ -40,7 +40,7 @@ function create() {
     .setDisplaySize(75, 75)
     .on("pointerdown", (event) => {
       const { position } = event;
-      const vector = { x: croissant.x - position.x, y: croissant.y - position.y };
+      const vector = { x: croissant.x - position.x, y: -Math.abs(croissant.y - position.y) };
       vector.x /= 75;
       vector.y /= 75;
       croissant.applyForce(vector);

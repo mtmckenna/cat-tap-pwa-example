@@ -35,7 +35,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "14f822b5b8c3db4bd812acdc97ab6644"
+    "revision": "b4f629b52fc630640da57af21a410b07"
   },
   {
     "url": "lib/phaser.min.js",
