@@ -41,8 +41,8 @@ function create() {
     .on("pointerdown", (event) => {
       const { position } = event;
       const vector = { x: croissant.x - position.x, y: -Math.abs(croissant.y - position.y) };
-      vector.x /= 75;
-      vector.y /= 75;
+      vector.x /= 65;
+      vector.y /= 65;
       croissant.applyForce(vector);
       score++;
     });
